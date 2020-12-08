@@ -1,27 +1,24 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <input type="text" v-model="search" />
-    <p>Searching for - {{ search }}</p>
-    <div v-for="name of matchingNames" :key="name">
-      {{ name }}
-    </div>
+    <PostList :posts="posts" />
   </div>
 </template>
 
 <script>
-import { ref, computed } from 'vue';
+import PostList from '../components/PostList';
+import { ref } from 'vue';
+
 export default {
   name: 'Home',
+  components: { PostList },
   setup() {
-    let search = ref('');
-    let names = ref(['mario', 'luigi', 'peach', 'koopa', 'bowser', 'toads']);
+    const posts = ref([
+      { title: 'Top 5 css tips', body: 'lorem ipsum', id: 1 },
+      { title: 'learn vue Composition API', body: 'lorem ipsum', id: 2 },
+    ]);
 
-    const matchingNames = computed(() => {
-      return names.value.filter((name) => name.includes(search.value));
-    });
-
-    return { names, matchingNames, search };
+    return { posts };
   },
 };
 </script>
