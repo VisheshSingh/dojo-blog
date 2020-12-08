@@ -1,27 +1,49 @@
 <template>
   <div class="home">
-    Composition API
-    <p>My name is {{ name }} and my age is {{ age }}</p>
-    <button @click="handleClick">Click me</button>
-    <button @click="age++">Increment age</button><br />
-    <input type="text" v-model="name" />
+    <h1>Home</h1>
+    <div class="ref-reactive">
+      <div>
+        <h2>Refs</h2>
+        <p>{{ ninjaOne.name }}-{{ ninjaOne.age }}</p>
+        <button @click="updateNinjaOne">Update Ref</button>
+      </div>
+      <div>
+        <h2>Reactive</h2>
+        <p>{{ ninjaTwo.name }}-{{ ninjaTwo.age }}</p>
+        <button @click="updateNinjaTwo">Update Reactive</button>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 export default {
   name: 'Home',
   setup() {
-    let name = ref('v-boy');
-    let age = ref(30);
+    let ninjaOne = ref({ name: 'Peter', age: 19 });
+    let ninjaTwo = reactive({ name: 'Miles', age: 17 });
 
-    let handleClick = () => {
-      name.value = 'Peter';
-      age.value = 29;
+    let updateNinjaOne = () => {
+      ninjaOne.value.name = 'Mario';
+      ninjaOne.value.age = 29;
+    };
+    let updateNinjaTwo = () => {
+      ninjaTwo.name = 'Luigi';
+      ninjaTwo.age = 28;
     };
 
-    return { name, age, handleClick };
+    return { updateNinjaOne, updateNinjaTwo, ninjaOne, ninjaTwo };
   },
 };
 </script>
+
+<style>
+.ref-reactive {
+  max-width: 300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>
