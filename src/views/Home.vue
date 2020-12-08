@@ -1,8 +1,10 @@
 <template>
   <div class="home">
     Composition API
-    <p ref="paragraph">My name is {{ name }} and my age is {{ age }}</p>
+    <p>My name is {{ name }} and my age is {{ age }}</p>
     <button @click="handleClick">Click me</button>
+    <button @click="age++">Increment age</button><br />
+    <input type="text" v-model="name" />
   </div>
 </template>
 
@@ -11,17 +13,15 @@ import { ref } from 'vue';
 export default {
   name: 'Home',
   setup() {
-    let name = 'v-boy';
-    let age = 30;
-    let paragraph = ref(null);
+    let name = ref('v-boy');
+    let age = ref(30);
 
     let handleClick = () => {
-      console.log(paragraph, paragraph.value);
-      paragraph.value.classList.add('test');
-      paragraph.value.textContent = 'wohuuuu!!!';
+      name.value = 'Peter';
+      age.value = 29;
     };
 
-    return { name, age, handleClick, paragraph };
+    return { name, age, handleClick };
   },
 };
 </script>
