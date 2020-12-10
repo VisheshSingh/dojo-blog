@@ -1,7 +1,13 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <PostList :posts="posts" />
+    <div v-if="error">{{ error }}</div>
+    <div v-if="posts.length">
+      <PostList :posts="posts" />
+    </div>
+    <div v-else>
+      Loading...
+    </div>
   </div>
 </template>
 
@@ -13,12 +19,27 @@ export default {
   name: 'Home',
   components: { PostList },
   setup() {
-    const posts = ref([
-      { title: 'Top 5 css tips', body: 'lorem ipsum', id: 1 },
-      { title: 'learn vue Composition API', body: 'lorem ipsum', id: 2 },
-    ]);
+    let posts = ref([]);
+    const error = ref(null);
 
-    return { posts };
+    const load = async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/posts`);
+        if (!res.ok) {
+          throw new Error('no data available');
+        }
+        const data = await res.json();
+        posts.value = data;
+        console.log(posts.value);
+      } catch (err) {
+        error.value = err.message;
+        console.log(error.value);
+      }
+    };
+
+    load();
+
+    return { posts, error };
   },
 };
 </script>

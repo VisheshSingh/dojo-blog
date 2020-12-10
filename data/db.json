@@ -3,7 +3,7 @@
         {
             "id":1,
             "title": "Welcome to new blog",
-            "desc": "Lorem ipsum text",
+            "body": "Lorem ipsum text",
             "tags": [
                 "web",
                 "vue",
@@ -13,7 +13,7 @@
         {
             "id":2,
             "title": "Top 5 css tips",
-            "desc": "Lorem ipsum text",
+            "body": "Lorem ipsum text",
             "tags": [
                 "CSS",
                 "webdev",
